@@ -1,0 +1,36 @@
+<!DOCTYPE aesl-source>
+<network>
+
+
+<!--list of global events-->
+<event size="2" name="distance"/>
+
+
+<!--list of constants-->
+
+
+<!--show keywords state-->
+<keywords flag="true"/>
+
+
+<!--node thymio-II-->
+<node nodeId="13130" name="thymio-II">var reference = 1000
+var measured
+var error
+onevent prox
+measured = prox.horizontal[2]
+error = reference - measured
+
+if error < 0 then
+motor.left.target = -200
+motor.right.target = -200
+elseif error == 0 then
+motor.left.target = 0
+motor.right.target = 0
+elseif error > 0 then
+motor.left.target = 100
+motor.right.target = 100
+end</node>
+
+
+</network>
