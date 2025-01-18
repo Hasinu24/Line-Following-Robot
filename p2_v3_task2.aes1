@@ -1,0 +1,53 @@
+<!DOCTYPE aesl-source>
+<network>
+
+
+<!--list of global events-->
+
+
+<!--list of constants-->
+
+
+<!--show keywords state-->
+<keywords flag="true"/>
+
+
+<!--node thymio-II-->
+<node nodeId="13130" name="thymio-II">var timer
+var direction
+onevent prox
+
+if prox.horizontal[2] > 1000 then
+motor.right.target = 100
+motor.left.target = 100
+timer.period[0] = 0
+direction = 1
+elseif prox.horizontal[4] > 1000 then
+motor.right.target = 50
+motor.left.target = 150
+timer.period[0]= 750
+direction = 2
+elseif prox.horizontal[0] > 1000 then
+motor.right.target = 150
+motor.left.target = 50
+direction = 3
+timer.period[0] = 750
+elseif direction == 1 and prox.horizontal[2] == 0 then
+motor.right.target = 0
+motor.left.target = 0
+end
+onevent timer0
+if direction ==2 then
+motor.right.target = 150
+motor.left.target = 50
+direction =3
+
+elseif direction == 3 then
+motor.right.target = 50
+
+motor.left.target = 150
+direction = 2
+end</node>
+
+
+</network>
