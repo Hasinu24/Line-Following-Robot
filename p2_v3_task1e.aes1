@@ -1,0 +1,34 @@
+<!DOCTYPE aesl-source>
+<network>
+
+
+<!--list of global events-->
+<event size="2" name="distance"/>
+
+
+<!--list of constants-->
+
+
+<!--show keywords state-->
+<keywords flag="true"/>
+
+
+<!--node thymio-II-->
+<node nodeId="13130" name="thymio-II">var reference = 1000
+var measured
+var error
+var control_signal
+var kp = 5
+onevent prox
+measured = prox.horizontal[2]
+error = reference - measured
+emit distance[error, measured]
+error = error/10
+
+control_signal = kp * error
+motor.left.target = control_signal
+motor.right.target = control_signal
+</node>
+
+
+</network>
